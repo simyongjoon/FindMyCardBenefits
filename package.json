@@ -11,7 +11,9 @@
     "typecheck": "tsc --noEmit",
     "validate:data": "tsx scripts/validate-data.ts",
     "check:dupes": "tsx scripts/find-duplicates.ts",
-    "check:tokens": "tsx scripts/check-tokens.ts"
+    "check:tokens": "tsx scripts/check-tokens.ts",
+    "build:figma": "tsx scripts/build-figma-tokens.ts",
+    "check:figma": "tsx scripts/build-figma-tokens.ts --check"
   },
   "dependencies": {
     "lucide-react": "^0.525.0",

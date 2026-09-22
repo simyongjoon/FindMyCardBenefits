@@ -1,0 +1,281 @@
+{
+  "$description": "Figma Variables import 파일 (W3C Design Tokens 포맷). 원본: docs/design-tokens.json ← src/styles/theme.css. 그룹 경로가 Figma 변수명(color/bg)이 된다. 그림자·그라데이션 없음.",
+  "color": {
+    "bg": {
+      "$type": "color",
+      "$value": "#FFFFFF",
+      "$description": "앱 콘텐츠 패널(430px) · 하단 탭바 · 바텀시트 배경"
+    },
+    "bg-sub": {
+      "$type": "color",
+      "$value": "#F2F4F6",
+      "$description": "페이지 바깥 바탕(body) · 혜택 아이콘 박스 40px · 미선택 칩 · 세그먼트 트랙 · 안내 박스 · 카드 검색 입력창 · '택1' 배지"
+    },
+    "text": {
+      "$type": "color",
+      "$value": "#191F28",
+      "$description": "제목/본문 텍스트 · 토스트 배경"
+    },
+    "text-sub": {
+      "$type": "color",
+      "$value": "#6B7684",
+      "$description": "'내 카드 N장' · 혜택 부제 · 카드사 · '혜택 N개' · 미선택 칩 글씨 · 카테고리 아이콘 stroke"
+    },
+    "text-muted": {
+      "$type": "color",
+      "$value": "#8B95A1",
+      "$description": "동작 안내 한 줄 · 비활성 탭 아이콘/라벨 · 입력창 placeholder · 추천 혜택 한도"
+    },
+    "border": {
+      "$type": "color",
+      "$value": "#E5E8EB",
+      "$description": "목록 행 구분선 · 하단 탭바 상단 선 · 시트 상단 핸들 · 시트 테두리"
+    },
+    "accent": {
+      "$type": "color",
+      "$value": "#3182F6",
+      "$description": "핵심 숫자 · 선택된 칩 배경 · 활성 탭 · 채움 버튼 · '내 카드에 추가' 텍스트 버튼 · 선택 카드 외곽선"
+    },
+    "on-accent": {
+      "$type": "color",
+      "$value": "#FFFFFF",
+      "$description": "강조색/카드 데이터 색 배경 위의 흰 글씨 전용 토큰 (카드 요약 박스, 카드 태그, 선택 칩, 채움 버튼)"
+    },
+    "scrim": {
+      "$type": "color",
+      "$value": "rgba(25, 31, 40, 0.45)",
+      "$description": "바텀시트/다이얼로그 뒤 반투명 배경 — 그림자 대신 깊이 표현 (#191F28 45%)"
+    }
+  },
+  "derived": {
+    "card-summary-subtitle": {
+      "$type": "color",
+      "$value": "rgba(255, 255, 255, 0.85)",
+      "$description": "카드 요약 박스의 '혜택 N개' (on-accent 85%)"
+    },
+    "toast-background": {
+      "$type": "color",
+      "$value": "{color.text}",
+      "$description": "하단 토스트 — text/bg 반전"
+    },
+    "toast-text": {
+      "$type": "color",
+      "$value": "{color.bg}",
+      "$description": "토스트 글씨 — color.bg 참조"
+    },
+    "selected-card-outline": {
+      "$type": "color",
+      "$value": "{color.accent}",
+      "$description": "선택된 카드 요약 박스 외곽선"
+    },
+    "selected-card-outline-width": {
+      "$type": "number",
+      "$value": 2,
+      "$description": "선택된 카드 외곽선 두께 (stroke weight)"
+    },
+    "selected-card-outline-offset": {
+      "$type": "number",
+      "$value": 2,
+      "$description": "선택된 카드 외곽선 바깥 여백 — offset 2px"
+    },
+    "pwa-theme-color": {
+      "$type": "color",
+      "$value": "{color.bg}",
+      "$description": "index.html theme-color + manifest theme_color/background_color"
+    },
+    "favicon-background": {
+      "$type": "color",
+      "$value": "{color.accent}",
+      "$description": "public/favicon.svg 배경 — color.accent 참조"
+    },
+    "favicon-secondary": {
+      "$type": "color",
+      "$value": "{color.bg}",
+      "$description": "public/favicon.svg 카드 도형 — color.bg 참조"
+    },
+    "favicon-stripe-opacity": {
+      "$type": "number",
+      "$value": 0.25,
+      "$description": "파비콘 카드 줄무늬 불투명도"
+    }
+  },
+  "card": {
+    "card-a": {
+      "$type": "color",
+      "$value": "#534AB7",
+      "$description": "A카드 · 신한카드 — 글씨는 항상 color/on-accent"
+    },
+    "card-b": {
+      "$type": "color",
+      "$value": "#0F6E56",
+      "$description": "B카드 · 삼성카드 — 글씨는 항상 color/on-accent"
+    },
+    "card-c": {
+      "$type": "color",
+      "$value": "#993C1D",
+      "$description": "C카드 · 현대카드 — 글씨는 항상 color/on-accent"
+    },
+    "card-d": {
+      "$type": "color",
+      "$value": "#2E6E8E",
+      "$description": "모닝커피 체크카드 · 카카오뱅크 — 글씨는 항상 color/on-accent"
+    },
+    "card-e": {
+      "$type": "color",
+      "$value": "#6C4F7D",
+      "$description": "주유플러스 카드 · 롯데카드 — 글씨는 항상 color/on-accent"
+    },
+    "card-f": {
+      "$type": "color",
+      "$value": "#7C6A45",
+      "$description": "슬로우라이프 체크카드 · 우리카드 — 글씨는 항상 color/on-accent"
+    },
+    "card-g": {
+      "$type": "color",
+      "$value": "#A2546B",
+      "$description": "글로우쇼핑 카드 · 하나카드 — 글씨는 항상 color/on-accent"
+    },
+    "card-h": {
+      "$type": "color",
+      "$value": "#3F6142",
+      "$description": "데일리주유 카드 · KB국민카드 — 글씨는 항상 color/on-accent"
+    },
+    "card-i": {
+      "$type": "color",
+      "$value": "#4C5B74",
+      "$description": "위클리쇼핑 체크카드 · NH농협카드 — 글씨는 항상 color/on-accent"
+    },
+    "card-j": {
+      "$type": "color",
+      "$value": "#7A2F3B",
+      "$description": "그린교통 카드 · IBK기업은행 — 글씨는 항상 color/on-accent"
+    },
+    "card-hana-narasarang": {
+      "$type": "color",
+      "$value": "#2B5AA6",
+      "$description": "하나 나라사랑카드(체크) · 하나카드 — 글씨는 항상 color/on-accent"
+    },
+    "card-kb-narasarang": {
+      "$type": "color",
+      "$value": "#8C6D1F",
+      "$description": "KB국민 나라사랑카드(체크) · KB국민카드 — 글씨는 항상 color/on-accent"
+    }
+  },
+  "radius": {
+    "card": {
+      "$type": "number",
+      "$value": 12,
+      "$description": "혜택 아이콘 박스 · 안내 박스 · 카드 추가 버튼 · 검색 입력창 · 하단 탭 항목"
+    },
+    "chip": {
+      "$type": "number",
+      "$value": 999,
+      "$description": "카테고리 칩 · 관심분야 칩 · 세그먼트 토글 · 토스트"
+    },
+    "cardSummary": {
+      "$type": "number",
+      "$value": 10,
+      "$description": "카드 요약 박스 (높이 64px)"
+    },
+    "miniThumb": {
+      "$type": "number",
+      "$value": 6,
+      "$description": "카드 미니 썸네일 44x28px · 카드 태그 'A카드'"
+    },
+    "badge": {
+      "$type": "number",
+      "$value": 4,
+      "$description": "'택1' 배지"
+    }
+  },
+  "font-size": {
+    "screenTitle": {
+      "$type": "number",
+      "$value": 22,
+      "$description": "bold · '이번 달 받을 수 있는 혜택이 N개 있어요' · '내 카드 N장' · '어떤 혜택이 필요하세요?'"
+    },
+    "sheetTitle": {
+      "$type": "number",
+      "$value": 17,
+      "$description": "bold · 바텀시트 제목"
+    },
+    "rowTitle": {
+      "$type": "number",
+      "$value": 15,
+      "$description": "semibold · 혜택 제목 · 카드명 · 입력창 텍스트"
+    },
+    "empty": {
+      "$type": "number",
+      "$value": 14,
+      "$description": "medium · 빈 상태 문구"
+    },
+    "chip": {
+      "$type": "number",
+      "$value": 13,
+      "$description": "medium / 선택 시 semibold · 칩 · 세그먼트 토글 · 추천 카드 혜택 행 · 토스트 · 텍스트 버튼"
+    },
+    "caption": {
+      "$type": "number",
+      "$value": 12,
+      "$description": "medium · '카테고리 · 월 한도' · 카드사 · '혜택 N개' · 상단 작은 라벨"
+    },
+    "tag": {
+      "$type": "number",
+      "$value": 11,
+      "$description": "semibold · 카드 태그 · 상단 작은 라벨 · 탭 라벨"
+    },
+    "badge": {
+      "$type": "number",
+      "$value": 10,
+      "$description": "bold · '택1' 배지"
+    }
+  },
+  "layout": {
+    "max-width": {
+      "$type": "number",
+      "$value": 430
+    },
+    "screen-padding-x": {
+      "$type": "number",
+      "$value": 20
+    },
+    "screen-padding-top": {
+      "$type": "number",
+      "$value": 32
+    },
+    "bottom-nav-reserve": {
+      "$type": "number",
+      "$value": 112
+    },
+    "card-summary-height": {
+      "$type": "number",
+      "$value": 64
+    },
+    "cta-height": {
+      "$type": "number",
+      "$value": 52
+    },
+    "search-height": {
+      "$type": "number",
+      "$value": 48
+    },
+    "icon-box": {
+      "$type": "number",
+      "$value": 40
+    },
+    "tab-icon": {
+      "$type": "number",
+      "$value": 22
+    },
+    "mini-thumb-width": {
+      "$type": "number",
+      "$value": 44,
+      "$description": "카드 미니 썸네일 너비 (44x28)"
+    },
+    "mini-thumb-height": {
+      "$type": "number",
+      "$value": 28,
+      "$description": "카드 미니 썸네일 높이 (44x28)"
+    }
+  }
+}
