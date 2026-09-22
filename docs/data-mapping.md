@@ -39,6 +39,22 @@
 - 카드 전체 기준 전월실적은 `Card.minMonthlySpend`에, 혜택별 실적은
   `Benefit.minMonthlySpend`에 입력한다.
 
+### 2-1. 행을 나누는 기준 (중요)
+
+혜택 화면 목록과 추천 점수가 모두 **월 한도(`monthlyLimit`)**를 쓰므로, 기준은 월 한도다.
+
+| 상황 | 처리 | 예 |
+| --- | --- | --- |
+| 월 한도가 구간마다 다름 | 구간별로 행을 나눈다 | 하나 대중교통 5행(`5000`~`50000`), KB 군마트 4행(첫 행만 `null`) |
+| 일·건당 한도만 다르고 월 한도가 같음(또는 둘 다 `null`) | **1행**으로 두고 `conditions`에 두 구간을 병기 | 하나 PX 1행("3만원 미만 일 5천원까지 / 3만원 이상 일 2만원까지, 월 한도 없음"), 하나 딜리버리 1행 |
+| 택1 구성 | 행을 나누고 `optionGroup`을 같게 | D카드 `"모닝팩"` 2행 |
+
+- 나눈 행은 **제목만 보고도 구분되게** 제목에 구간을 넣는다.
+  예: `"대중교통 20% 캐시백 (전월실적 10만원 이상)"`, `"군마트·GS25 해군마트 10% 환급할인 (결제액 3만원 미만)"`.
+- 이유: 혜택 목록 화면은 제목 + "카테고리 · 월 한도 N만원"만 보여준다. 제목이 같고 월 한도 표기가
+  같으면 두 행이 화면에서 완전히 똑같이 보여 사용자에게 중복 혜택으로 보인다
+  (`conditions`·`minMonthlySpend`·`evidence`는 목록에 표시되지 않는다).
+
 ## 3. 종류 매핑 (type → kind / rate / amount)
 
 | 원본 type | kind | rate / amount |
@@ -85,6 +101,8 @@
 - `npm run validate:data` — (a)타입 (b)evidence빈값 (c)없는cardId (d)카테고리 오타.
 - `npm run check:dupes` — 같은 카드 안에서 title이 같거나 앞 10글자가 같은 항목 진단
   (읽기 전용, 콘솔 표만 출력). `--card=<cardId>`로 카드 1장만 검사 가능.
+  요약 마지막 줄 `화면에서 구분 안 됨`이 0이 아니면 **실제 문제**다
+  (제목+카테고리+월 한도 표기가 같아 목록에서 같은 혜택으로 보임).
 - 새 카드 추가 후에는 validate + `tsc --noEmit` + `vite build`까지 돌린다.
 
 ## 8. 정상적인 "중복처럼 보이는" 데이터 (check:dupes 결과 해석)
@@ -93,13 +111,12 @@
 
 | 유형 | 예 | 구분 기준 |
 | --- | --- | --- |
-| 전월실적 구간 분리 | `benefit-narasarang-11`~`15` (대중교통 5행) | `minMonthlySpend`·`monthlyLimit`이 다름 |
-| 건당 금액 구간 분리 | `benefit-kb-narasarang-01`~`04` (군마트 4행) | `rate`·`conditions`가 다름 |
+| 월 한도 구간 분리(전월실적) | `benefit-narasarang-11`~`15` (대중교통 5행) | `minMonthlySpend`·`monthlyLimit`이 다르고 제목에 구간 표기 |
+| 월 한도 구간 분리(건당 금액) | `benefit-kb-narasarang-01`~`04` (군마트 4행) | 3만원 미만 행만 `monthlyLimit: null` |
 | 택1 구성 | 같은 `optionGroup`을 가진 행들 | `optionGroup`이 같음 |
-| 기념일/평시 분리 | `benefit-narasarang-07`(기념일) / `08`(평시) | `conditions`·`monthlyLimit`이 다름 |
-| 일 한도만 달라 제목이 같은 행 | `benefit-narasarang-01`/`02` | `conditions`의 일 한도가 다름 |
+| 앞 10글자만 같은 다른 혜택 | `benefit-narasarang-04`/`05` (CU 기념일 30% / 평시 10%) | `rate`가 다름 |
 
-→ "조건까지 전부 동일"로 표시된 클러스터만 실제 병합 후보다 (현재 0개).
+→ 판정 순서는 ① `조건까지 전부 동일` → ② `화면에서 구분 안 됨`. 둘 다 0이면 정상 (현재 둘 다 0개).
 
 ## 9. 화면 파생 규칙 (데이터 아님)
 

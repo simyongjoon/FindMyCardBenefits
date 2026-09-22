@@ -11,13 +11,17 @@
 import { readFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { formatMonthlyLimit } from '../src/lib/benefits.ts'
 import type { Benefit, Card } from '../src/types/card.ts'
 
 /** '앞 10글자' 비교 기준 — 이 길이까지 같으면 비슷한 제목으로 본다. */
 const TITLE_PREFIX_LENGTH = 10
 
 const HERE = dirname(fileURLToPath(import.meta.url))
-const DATA_DIR = resolve(HERE, '../src/data')
+const DEFAULT_DATA_DIR = resolve(HERE, '../src/data')
+
+/** 테스트용 fixture 경로 override — validate-data.ts의 VALIDATE_FIXTURE_DIR와 같은 방식 */
+const DATA_DIR = process.env.DUPE_FIXTURE_DIR ?? DEFAULT_DATA_DIR
 
 function readJson<T>(fileName: string): T {
   return JSON.parse(readFileSync(resolve(DATA_DIR, fileName), 'utf8')) as T
@@ -64,6 +68,20 @@ function signature(benefit: Benefit): string {
   ].join('|')
 }
 
+/**
+ * 혜택 목록 화면(ui/benefits/BenefitRow)이 실제로 그리는 값만 조합한 키.
+ * 제목 + "카테고리 · 한도 표기" + 카드 태그(카드 단위라 동일)가 모두 같으면
+ * 두 행은 화면에서 완전히 똑같이 보인다 = 사용자에게 "중복 혜택"으로 보인다.
+ * (conditions·minMonthlySpend·evidence는 목록에 표시되지 않는다)
+ */
+function uiKey(benefit: Benefit): string {
+  return [
+    normalizeTitle(benefit.title),
+    benefit.category,
+    formatMonthlyLimit(benefit.monthlyLimit),
+  ].join('|')
+}
+
 interface Cluster {
   cardId: string
   members: Benefit[]
@@ -71,6 +89,8 @@ interface Cluster {
   exactTitle: boolean
   /** 카테고리·한도·조건까지 전부 같은 실질 중복 후보 */
   identical: boolean
+  /** 목록 화면에 똑같이 보이는 행이 섞여 있는 경우 true (실제 문제 신호) */
+  showsIdentical: boolean
 }
 
 /**
@@ -98,11 +118,14 @@ function findClusters(benefits: Benefit[]): Cluster[] {
       if (members.length < 2) continue
       const distinctTitles = new Set(members.map((b) => normalizeTitle(b.title)))
       const distinctSignatures = new Set(members.map(signature))
+      const distinctUiKeys = new Set(members.map(uiKey))
       clusters.push({
         cardId,
         members,
         exactTitle: distinctTitles.size === 1,
         identical: distinctSignatures.size === 1,
+        // 행 수보다 서로 다른 "화면 표시"가 적으면 겹치는 조합이 있다는 뜻
+        showsIdentical: distinctUiKeys.size < members.length,
       })
     }
   }
@@ -137,7 +160,9 @@ if (targets.length === 0) {
 const clusters = findClusters(targets)
 
 if (clusters.length === 0) {
-  console.log(`\n중복 의심 항목이 없습니다. (기준: 같은 카드 안에서 title 또는 앞 ${TITLE_PREFIX_LENGTH}글자)`)
+  console.log(
+    `\n중복 의심 항목이 없습니다. (기준: 같은 카드 안에서 title 또는 앞 ${TITLE_PREFIX_LENGTH}글자)`,
+  )
 } else {
   for (const cluster of clusters) {
     const cardName = cardNameById.get(cluster.cardId) ?? '(cards.json에 없는 카드)'
@@ -147,7 +172,7 @@ if (clusters.length === 0) {
     console.log(
       `\n▶ ${cluster.cardId} · ${cardName} — ${cluster.members.length}건 (${reason}${
         cluster.identical ? ' · 조건까지 전부 동일' : ''
-      })`,
+      }${cluster.showsIdentical ? ' · ⚠ 화면에서 구분 안 됨' : ''})`,
     )
     console.table(cluster.members.map(toRow))
   }
@@ -157,6 +182,7 @@ const exactCount = clusters.filter((cluster) => cluster.exactTitle).length
 const similarOnlyCount = clusters.length - exactCount
 const memberCount = clusters.reduce((acc, cluster) => acc + cluster.members.length, 0)
 const identicalCount = clusters.filter((cluster) => cluster.identical).length
+const uiIdenticalCount = clusters.filter((cluster) => cluster.showsIdentical).length
 
 console.log('\n=== 요약 ===')
 console.log(`검사한 혜택: ${targets.length}건`)
@@ -165,4 +191,9 @@ console.log(
 )
 console.log(`중복 의심 항목: ${memberCount}건`)
 console.log(`조건까지 전부 동일(실질 중복 후보): ${identicalCount}개 클러스터`)
+console.log(
+  `화면에서 구분 안 됨(제목+카테고리+한도 표기 동일): ${uiIdenticalCount}개 클러스터${
+    uiIdenticalCount > 0 ? ' ← 실제 문제. 제목에 구간/조건을 넣거나 1행으로 병합할 것' : ''
+  }`,
+)
 console.log('데이터는 수정하지 않았습니다.')
