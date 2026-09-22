@@ -1,0 +1,55 @@
+/* 디자인 시스템 — 색상은 이 파일의 CSS 변수로만 정의한다.
+ * 컴포넌트(TSX/CSS)에는 hex를 직접 쓰지 않는다.
+ * 다크 모드는 나중에 [data-theme="dark"] 블록만 추가하면 된다.
+ */
+@import 'tailwindcss';
+
+:root {
+  --bg: #ffffff;
+  --bg-sub: #f2f4f6;
+  --text: #191f28;
+  --text-sub: #6b7684;
+  --text-muted: #8b95a1;
+  --border: #e5e8eb;
+  --accent: #3182f6;
+  /* 강조색/카드색 배경 위의 흰 글씨 — 스펙의 "흰 글씨" 전용 토큰 */
+  --on-accent: #ffffff;
+  /* 바텀시트/다이얼로그 뒤 반투명 배경 — 그림자 대신 깊이를 표현 */
+  --scrim: rgba(25, 31, 40, 0.45);
+}
+
+/* Tailwind v4 토큰 → CSS 변수 연결 (inline: 런타임 var 참조 유지) */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-sub: var(--bg-sub);
+  --color-text: var(--text);
+  --color-text-sub: var(--text-sub);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-scrim: var(--scrim);
+
+  --radius-card: 12px;
+  --radius-chip: 999px;
+
+  --font-sans:
+    'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
+    Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR',
+    'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    sans-serif;
+}
+
+/* 기본 바탕 */
+html,
+body {
+  background-color: var(--bg-sub);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  min-height: 100dvh;
+}

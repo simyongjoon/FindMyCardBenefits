@@ -1,0 +1,33 @@
+{
+  "name": "find-my-card-benefits",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "카드 혜택 모아보기 PWA (Vite + React + TypeScript)",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "validate:data": "tsx scripts/validate-data.ts"
+  },
+  "dependencies": {
+    "lucide-react": "^0.525.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.11",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.6.0",
+    "tailwindcss": "^4.1.11",
+    "tsx": "^4.19.2",
+    "typescript": "~5.8.3",
+    "vite": "^7.1.7",
+    "vite-plugin-pwa": "^1.0.0",
+    "zod": "^3.23.8"
+  }
+}

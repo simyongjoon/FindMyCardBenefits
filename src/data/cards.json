@@ -1,0 +1,14 @@
+[
+  { "id": "card-a", "name": "A카드", "issuer": "신한카드", "type": "credit", "annualFee": 0, "minMonthlySpend": 300000, "eligibility": null, "color": "#534AB7", "sourceUrl": "https://example.com/cards/card-a", "collectedAt": "2026-09-21" },
+  { "id": "card-b", "name": "B카드", "issuer": "삼성카드", "type": "credit", "annualFee": 15000, "minMonthlySpend": 300000, "eligibility": null, "color": "#0F6E56", "sourceUrl": "https://example.com/cards/card-b", "collectedAt": "2026-09-21" },
+  { "id": "card-c", "name": "C카드", "issuer": "현대카드", "type": "credit", "annualFee": 0, "minMonthlySpend": null, "eligibility": null, "color": "#993C1D", "sourceUrl": "https://example.com/cards/card-c", "collectedAt": "2026-09-21" },
+  { "id": "card-d", "name": "모닝커피 체크카드", "issuer": "카카오뱅크", "type": "check", "annualFee": 0, "minMonthlySpend": null, "eligibility": "만 19세 이상", "color": "#2E6E8E", "sourceUrl": "https://example.com/cards/card-d", "collectedAt": "2026-09-21" },
+  { "id": "card-e", "name": "주유플러스 카드", "issuer": "롯데카드", "type": "credit", "annualFee": 20000, "minMonthlySpend": 500000, "eligibility": null, "color": "#6C4F7D", "sourceUrl": "https://example.com/cards/card-e", "collectedAt": "2026-09-21" },
+  { "id": "card-f", "name": "슬로우라이프 체크카드", "issuer": "우리카드", "type": "check", "annualFee": 0, "minMonthlySpend": null, "eligibility": null, "color": "#7C6A45", "sourceUrl": "https://example.com/cards/card-f", "collectedAt": "2026-09-21" },
+  { "id": "card-g", "name": "글로우쇼핑 카드", "issuer": "하나카드", "type": "credit", "annualFee": 12000, "minMonthlySpend": 300000, "eligibility": "만 20세 이상", "color": "#A2546B", "sourceUrl": "https://example.com/cards/card-g", "collectedAt": "2026-09-21" },
+  { "id": "card-h", "name": "데일리주유 카드", "issuer": "KB국민카드", "type": "credit", "annualFee": 0, "minMonthlySpend": null, "eligibility": null, "color": "#3F6142", "sourceUrl": "https://example.com/cards/card-h", "collectedAt": "2026-09-21" },
+  { "id": "card-i", "name": "위클리쇼핑 체크카드", "issuer": "NH농협카드", "type": "check", "annualFee": 0, "minMonthlySpend": null, "eligibility": null, "color": "#4C5B74", "sourceUrl": "https://example.com/cards/card-i", "collectedAt": "2026-09-21" },
+  { "id": "card-j", "name": "그린교통 카드", "issuer": "IBK기업은행", "type": "credit", "annualFee": null, "minMonthlySpend": 300000, "eligibility": "만 18세 이상", "color": "#7A2F3B", "sourceUrl": "https://example.com/cards/card-j", "collectedAt": "2026-09-21" },
+  { "id": "card-hana-narasarang", "name": "하나 나라사랑카드(체크)", "issuer": "하나카드", "type": "check", "annualFee": 0, "minMonthlySpend": null, "eligibility": "나라사랑카드 발급 대상(병역판정검사 대상자 등)", "color": "#2B5AA6", "sourceUrl": "https://www.hanacard.co.kr", "collectedAt": "2026-09-21" },
+  { "id": "card-kb-narasarang", "name": "KB국민 나라사랑카드(체크)", "issuer": "KB국민카드", "type": "check", "annualFee": 0, "minMonthlySpend": null, "eligibility": "나라사랑카드 발급 대상(병역판정검사 대상자 등)", "color": "#8C6D1F", "sourceUrl": "https://www.kbcard.com", "collectedAt": "2026-09-21" }
+]
