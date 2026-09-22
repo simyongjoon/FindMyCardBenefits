@@ -34,6 +34,7 @@ export type BenefitCategory =
   | '해외'
   | '의료'
   | '마트'
+  | 'PX/군마트'
   | '기타'
 
 export type BenefitKind = 'discount' | 'cashback' | 'points'
@@ -67,4 +68,10 @@ export interface Benefit {
   /** 원문에서 그대로 가져온 근거 문장. 비어 있으면 안 된다 */
   evidence: string
 }
+
+/**
+ * 혜택 화면 보기 방식. 'benefit' = 혜택별, 'card' = 카드별.
+ * 도메인 데이터가 아니라 화면 상태값이지만 RN에서도 같은 값을 쓰므로 여기서 공유한다.
+ */
+export type BenefitViewMode = 'benefit' | 'card'
 

@@ -5,7 +5,7 @@
  */
 import type { Benefit, BenefitCategory, Card, CategoryFilter } from '../types/card.ts'
 
-/** 카테고리 전체 목록 — 13개. 혜택 칩/관심분야 칩의 기준 순서. */
+/** 카테고리 전체 목록 — 14개. 혜택 칩/관심분야 칩의 기준 순서. */
 export const BENEFIT_CATEGORIES: BenefitCategory[] = [
   '카페',
   '주유',
@@ -19,10 +19,21 @@ export const BENEFIT_CATEGORIES: BenefitCategory[] = [
   '해외',
   '의료',
   '마트',
+  'PX/군마트',
   '기타',
 ]
 
 export const CATEGORY_FILTERS: CategoryFilter[] = ['전체', ...BENEFIT_CATEGORIES]
+
+/**
+ * 내 카드 혜택에 실제로 존재하는 카테고리만 기준 순서대로 뽑는다.
+ * 카드 추가/삭제 시 myBenefits가 바뀌면 이 목록도 자동 갱신된다.
+ */
+export function getAvailableCategories(myBenefits: Benefit[]): BenefitCategory[] {
+  const present = new Set<BenefitCategory>()
+  for (const benefit of myBenefits) present.add(benefit.category)
+  return BENEFIT_CATEGORIES.filter((category) => present.has(category))
+}
 
 /** 등록 가능한 카드 검색 — 카드명/카드사 부분 일치 (대소문자·공백 무시). */
 export function searchCards(cards: Card[], query: string): Card[] {
@@ -66,6 +77,35 @@ export function filterBenefitsByCategory(
   if (category === '전체') return benefits
   const target: BenefitCategory = category
   return benefits.filter((benefit) => benefit.category === target)
+}
+
+/**
+ * 특정 카드의 혜택만 남긴다 (혜택별 보기의 "카드를 누르면 그 카드 혜택만 보기").
+ * cardId가 null이면 필터하지 않고 그대로 반환한다.
+ */
+export function filterBenefitsByCardId(benefits: Benefit[], cardId: string | null): Benefit[] {
+  if (cardId === null) return benefits
+  return benefits.filter((benefit) => benefit.cardId === cardId)
+}
+
+/** 카드별 보기의 섹션 1개 = 카드 1장 + 그 카드의 혜택 목록. */
+export interface CardBenefitGroup {
+  card: Card
+  benefits: Benefit[]
+}
+
+/**
+ * 카드별 보기용 그룹 — 등록한 카드 순서를 유지하고, 혜택이 하나도 없는 카드는
+ * 섹션을 만들지 않는다 (카테고리 필터 후 빈 섹션을 통째로 숨기는 규칙).
+ */
+export function groupBenefitsByCard(cards: Card[], benefits: Benefit[]): CardBenefitGroup[] {
+  const groups: CardBenefitGroup[] = []
+  for (const card of cards) {
+    const cardBenefits = benefits.filter((benefit) => benefit.cardId === card.id)
+    if (cardBenefits.length === 0) continue
+    groups.push({ card, benefits: cardBenefits })
+  }
+  return groups
 }
 
 /** 특정 카드의 혜택 개수 (카드 요약 박스의 "혜택 N개"용). 만료된 혜택은 제외한다. */

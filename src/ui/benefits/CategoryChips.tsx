@@ -1,17 +1,18 @@
-import { CATEGORY_FILTERS } from '../../lib/benefits.ts'
-import type { CategoryFilter } from '../../types/card.ts'
+import type { BenefitCategory, CategoryFilter } from '../../types/card.ts'
 
 interface CategoryChipsProps {
   selected: CategoryFilter
   onSelect: (category: CategoryFilter) => void
+  /** 내 카드 혜택에 실제로 존재하는 카테고리. 없으면 '전체'만 표시. */
+  availableCategories: BenefitCategory[]
 }
 
 /**
- * 카테고리 칩 — 가로 스크롤.
+ * 카테고리 칩 — 가로 스크롤. availableCategories(동적 목록)만 렌더링한다.
  * 선택: 강조색 배경 + 흰 글씨 / 미선택: var(--bg-sub) + 보조 글자색.
  * 색상은 토큰 클래스만 사용, hex 금지. 그림자/그라데이션 없음.
  */
-export function CategoryChips({ selected, onSelect }: CategoryChipsProps) {
+export function CategoryChips({ selected, onSelect, availableCategories }: CategoryChipsProps) {
   return (
     <div
       role="tablist"
@@ -19,7 +20,7 @@ export function CategoryChips({ selected, onSelect }: CategoryChipsProps) {
       className="-mx-5 overflow-x-auto px-5"
     >
       <div className="flex gap-2 pb-1">
-        {CATEGORY_FILTERS.map((category) => {
+        {(['전체', ...availableCategories] as CategoryFilter[]).map((category) => {
           const isActive = category === selected
           return (
             <button
@@ -41,3 +42,4 @@ export function CategoryChips({ selected, onSelect }: CategoryChipsProps) {
     </div>
   )
 }
+

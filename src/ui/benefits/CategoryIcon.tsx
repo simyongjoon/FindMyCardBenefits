@@ -5,6 +5,7 @@ import {
   Coffee,
   Globe,
   HeartPulse,
+  Shield,
   ShoppingBag,
   ShoppingCart,
   Smartphone,
@@ -16,7 +17,7 @@ import {
 import type { LucideIcon } from 'lucide-react'
 import type { BenefitCategory } from '../../types/card.ts'
 
-/** 카테고리 → 아이콘 매핑 (UI 전용, 로직 없음). 13개 전체 커버. */
+/** 카테고리 → 아이콘 매핑 (UI 전용, 로직 없음). 14개 전체 커버. */
 export const CATEGORY_ICONS: Record<BenefitCategory, LucideIcon> = {
   카페: Coffee,
   주유: CarFront,
@@ -30,5 +31,6 @@ export const CATEGORY_ICONS: Record<BenefitCategory, LucideIcon> = {
   해외: Globe,
   의료: HeartPulse,
   마트: ShoppingCart,
+  'PX/군마트': Shield,
   기타: Tag,
 }

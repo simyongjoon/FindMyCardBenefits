@@ -21,6 +21,7 @@ const CATEGORIES = [
   '해외',
   '의료',
   '마트',
+  'PX/군마트',
   '기타',
 ] as const
 

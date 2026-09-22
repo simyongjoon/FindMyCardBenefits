@@ -53,3 +53,9 @@ body {
 #root {
   min-height: 100dvh;
 }
+
+/* 카드 요약 박스에서 선택된 카드 표시 — 그림자 대신 강조색 외곽선(2px) */
+.card-selected {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
