@@ -1,0 +1,92 @@
+{
+  "$comment": "디자인 토큰 원본은 src/styles/theme.css 의 :root 변수다. 이 파일은 Figma 작업용 사본이며, 값을 바꿀 때는 theme.css 를 먼저 고치고 여기를 맞춘다. 색상은 라이트 모드 1종만 존재한다.",
+  "color": {
+    "bg": { "value": "#FFFFFF", "usage": "앱 콘텐츠 패널(430px) · 하단 탭바 · 바텀시트 배경" },
+    "bg-sub": {
+      "value": "#F2F4F6",
+      "usage": "페이지 바깥 바탕(body) · 혜택 아이콘 박스 40px · 미선택 칩 · 세그먼트 트랙 · 안내 박스 · 카드 검색 입력창 · '택1' 배지"
+    },
+    "text": { "value": "#191F28", "usage": "제목/본문 텍스트 · 토스트 배경" },
+    "text-sub": {
+      "value": "#6B7684",
+      "usage": "'내 카드 N장' · 혜택 부제 · 카드사 · '혜택 N개' · 미선택 칩 글씨 · 카테고리 아이콘 stroke"
+    },
+    "text-muted": {
+      "value": "#8B95A1",
+      "usage": "동작 안내 한 줄 · 비활성 탭 아이콘/라벨 · 입력창 placeholder · 추천 혜택 한도"
+    },
+    "border": {
+      "value": "#E5E8EB",
+      "usage": "목록 행 구분선 · 하단 탭바 상단 선 · 시트 상단 핸들 · 시트 테두리"
+    },
+    "accent": {
+      "value": "#3182F6",
+      "usage": "핵심 숫자 · 선택된 칩 배경 · 활성 탭 · 채움 버튼 · '내 카드에 추가' 텍스트 버튼 · 선택 카드 외곽선"
+    },
+    "on-accent": {
+      "value": "#FFFFFF",
+      "usage": "강조색/카드 데이터 색 배경 위의 흰 글씨 전용 토큰 (카드 요약 박스, 카드 태그, 선택 칩, 채움 버튼)"
+    },
+    "scrim": {
+      "value": "#191F28",
+      "opacity": 0.45,
+      "usage": "바텀시트/다이얼로그 뒤 반투명 배경 — 그림자 대신 깊이 표현"
+    }
+  },
+  "derived": {
+    "cardSummarySubtitle": { "value": "#FFFFFF", "opacity": 0.85, "usage": "카드 요약 박스의 '혜택 N개' (on-accent 85%)" },
+    "toast": { "background": "#191F28", "text": "#FFFFFF", "usage": "하단 토스트 — text/bg 반전" },
+    "selectedCardOutline": { "value": "#3182F6", "width": 2, "offset": 2, "usage": "선택된 카드 요약 박스 외곽선" },
+    "pwaThemeColor": { "value": "#FFFFFF", "usage": "index.html theme-color + manifest theme_color/background_color" },
+    "favicon": { "value": "#3182F6", "secondary": "#FFFFFF", "stripeOpacity": 0.25, "usage": "public/favicon.svg" }
+  },
+  "radius": {
+    "card": { "value": 12, "usage": "혜택 아이콘 박스 · 안내 박스 · 카드 추가 버튼 · 검색 입력창 · 하단 탭 항목" },
+    "chip": { "value": 999, "usage": "카테고리 칩 · 관심분야 칩 · 세그먼트 토글 · 토스트" },
+    "cardSummary": { "value": 10, "usage": "카드 요약 박스 (높이 64px)" },
+    "miniThumb": { "value": 6, "usage": "카드 미니 썸네일 44x28px · 카드 태그 'A카드'" },
+    "badge": { "value": 4, "usage": "'택1' 배지" }
+  },
+  "fontSize": {
+    "screenTitle": { "value": 22, "weight": "bold", "usage": "'이번 달 받을 수 있는 혜택이 N개 있어요' · '내 카드 N장' · '어떤 혜택이 필요하세요?'" },
+    "sheetTitle": { "value": 17, "weight": "bold", "usage": "바텀시트 제목" },
+    "rowTitle": { "value": 15, "weight": "semibold", "usage": "혜택 제목 · 카드명 · 입력창 텍스트" },
+    "empty": { "value": 14, "weight": "medium", "usage": "빈 상태 문구" },
+    "chip": { "value": 13, "weight": "medium / 선택 시 semibold", "usage": "칩 · 세그먼트 토글 · 추천 카드 혜택 행 · 토스트 · 텍스트 버튼" },
+    "caption": { "value": 12, "weight": "medium", "usage": "'카테고리 · 월 한도' · 카드사 · '혜택 N개' · 상단 작은 라벨" },
+    "tag": { "value": 11, "weight": "semibold", "usage": "카드 태그 · 상단 작은 라벨 · 탭 라벨" },
+    "badge": { "value": 10, "weight": "bold", "usage": "'택1' 배지" }
+  },
+  "layout": {
+    "maxWidth": 430,
+    "screenPaddingX": 20,
+    "screenPaddingTop": 32,
+    "bottomNavReserve": 112,
+    "cardSummaryHeight": 64,
+    "ctaHeight": 52,
+    "searchHeight": 48,
+    "iconBox": 40,
+    "miniThumb": "44x28",
+    "tabIcon": 22
+  },
+  "cardColors": [
+    { "id": "card-a", "name": "A카드", "issuer": "신한카드", "value": "#534AB7" },
+    { "id": "card-b", "name": "B카드", "issuer": "삼성카드", "value": "#0F6E56" },
+    { "id": "card-c", "name": "C카드", "issuer": "현대카드", "value": "#993C1D" },
+    { "id": "card-d", "name": "모닝커피 체크카드", "issuer": "카카오뱅크", "value": "#2E6E8E" },
+    { "id": "card-e", "name": "주유플러스 카드", "issuer": "롯데카드", "value": "#6C4F7D" },
+    { "id": "card-f", "name": "슬로우라이프 체크카드", "issuer": "우리카드", "value": "#7C6A45" },
+    { "id": "card-g", "name": "글로우쇼핑 카드", "issuer": "하나카드", "value": "#A2546B" },
+    { "id": "card-h", "name": "데일리주유 카드", "issuer": "KB국민카드", "value": "#3F6142" },
+    { "id": "card-i", "name": "위클리쇼핑 체크카드", "issuer": "NH농협카드", "value": "#4C5B74" },
+    { "id": "card-j", "name": "그린교통 카드", "issuer": "IBK기업은행", "value": "#7A2F3B" },
+    { "id": "card-hana-narasarang", "name": "하나 나라사랑카드(체크)", "issuer": "하나카드", "value": "#2B5AA6" },
+    { "id": "card-kb-narasarang", "name": "KB국민 나라사랑카드(체크)", "issuer": "KB국민카드", "value": "#8C6D1F" }
+  ],
+  "cardColorNote": "카드 색은 데이터(cards.json)에 들어 있는 값이라 Figma 변수 대신 Swap 가능한 Fill 스타일로 두는 편이 맞다. 화면에서는 카드 썸네일·카드 요약 박스·카드 태그 배경에만 쓰이고, 그 위 글씨는 항상 on-accent(#FFFFFF)다.",
+  "rules": [
+    "그림자·그라데이션 없음 (전 화면 0건). 깊이는 scrim과 border로만 표현한다.",
+    "한 화면에 채움 강조색 버튼은 1개까지. 다이얼로그가 뜨면 배경 버튼이 가려지므로 예외로 본다.",
+    "컴포넌트에 hex 직접 입력 금지 — 위 9개 변수(또는 카드 데이터 색)만 사용한다."
+  ]
+}

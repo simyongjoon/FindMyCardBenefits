@@ -61,6 +61,7 @@ src/
     validate-data.ts     # zod 데이터 검증 (`npm run validate:data`)
                          # (a)타입 (b)evidence빈값 (c)없는cardId (d)카테고리 오타
     find-duplicates.ts   # 중복 혜택 진단 (`npm run check:dupes`) — 읽기 전용
+    check-tokens.ts      # 토큰 사본 대조 (`npm run check:tokens`) — 읽기 전용
   data/           # cards.json(12장) / benefits.json(69건) 샘플 + 플랫폼 어댑터 경계
                   # 전월실적 구간별 행 분리, 택1(optionGroup), 만료(validUntil) 행 포함
                   # 일 한도만 있는 혜택은 monthlyLimit null + conditions에 일 한도 명시
